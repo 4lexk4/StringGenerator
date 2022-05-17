@@ -9,13 +9,13 @@ namespace StringGenerator.Tests.Chunks
         [Test]
         public void Constructor_ThrowsException_IfParameterIsNull()
         {
-            Assert.Throws<ArgumentException>(() => Chunk.Create(null));
+            Assert.Throws<ArgumentException>(() => Chunk.File(null));
         }
 
         [Test]
         public void Constructor_ThrowsException_IfFileDoesNotExist()
         {
-            Assert.Throws<ArgumentException>(() => Chunk.Create("test_filename.txt"));
+            Assert.Throws<ArgumentException>(() => Chunk.File("test_filename.txt"));
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace StringGenerator.Tests.Chunks
             {
                 tempFile.WriteAllLines("row0", "row1", "row2");
 
-                var fileChunk = Chunk.Create(tempFile.FileName);
+                var fileChunk = Chunk.File(tempFile.FileName);
 
                 for (var i = 0; i < 3; i++)
                 {

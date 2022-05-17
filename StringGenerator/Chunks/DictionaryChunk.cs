@@ -13,6 +13,10 @@
             _values = values;
         }
 
+        public DictionaryChunk(params T[] values) : this(values?.ToList() ?? new List<T>())
+        {
+        }
+
         public string Value => _values[_index]?.ToString() ?? string.Empty;
 
         public bool Increment()
