@@ -4,14 +4,6 @@ namespace StringGenerator
 {
     public sealed class Chunk
     {
-        public static IChunk Collection<T>(IReadOnlyList<T> collection)
-        {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (collection.Count == 0) throw new ArgumentException("Collection cannot be empty", nameof(collection));
-
-            return new DictionaryChunk<T>(collection);
-        }
-
         public static IChunk Collection<T>(params T[] collection)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));

@@ -8,7 +8,7 @@ namespace StringGenerator.Tests
         [Test]
         public void Increment_GoesThrowAllDictionaryValues_WhenCalls()
         {
-            var word = new Word(Chunk.Collection<char>(new char[] { 'a', 'b' }), Chunk.Collection<int>(new int[] { 1, 2, 3 }));
+            var word = new Word(Chunk.Collection('a', 'b'), Chunk.Collection(1, 2, 3 ));
             var expectedValues = new string[] { "a1", "a2", "a3", "b1", "b2", "b3" };
 
             for(var i = 0; i < expectedValues.Length; i++)

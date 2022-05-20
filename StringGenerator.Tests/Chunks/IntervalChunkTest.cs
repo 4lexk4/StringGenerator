@@ -33,5 +33,33 @@ namespace StringGenerator.Tests.Chunks
             Assert.IsTrue(intervalChunk.Increment());
             Assert.AreEqual(int.MaxValue.ToString(), intervalChunk.Value);
         }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(3)]
+        [TestCase(4)]
+        public void SetValue_CanBeSet(int value)
+        {
+            var intervalChunk = Chunk.FromTo(0, 4);
+
+            Assert.AreEqual("0", intervalChunk.Value);
+
+            intervalChunk.Value = value.ToString();
+
+            Assert.AreEqual(value.ToString(), intervalChunk.Value);
+        }
+
+        [Test]
+        [TestCase(-1)]
+        [TestCase(5)]
+        public void SetValue_ThrowsException_IfValueIsOutsideBorders(int value)
+        {
+            var intervalChunk = Chunk.FromTo(0, 4);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                intervalChunk.Value = value.ToString();
+            });
+        }
     }
 }

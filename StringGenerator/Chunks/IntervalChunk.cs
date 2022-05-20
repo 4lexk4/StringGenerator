@@ -16,7 +16,20 @@
             Reset();
         }
 
-        public string Value => _currentValue.ToString();
+        public string Value 
+        { 
+            get
+            {
+                return _currentValue.ToString();
+            }
+            set
+            {
+                if (!int.TryParse(value, out int intValue)) throw new ArgumentException("Value must be int", nameof(value));
+                if (intValue > _to || intValue < _from) throw new ArgumentOutOfRangeException($"Value ({intValue}) must be between From ({_from}) and To ({_to})", nameof(value));
+
+                _currentValue = intValue;
+            }
+        }
 
         public bool Increment()
         {

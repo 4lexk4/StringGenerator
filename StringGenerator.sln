@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringGenerator", "StringGenerator\StringGenerator.csproj", "{0EBE1232-70F5-4C3A-9067-66EE798CDED2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringGenerator.Tests", "StringGenerator.Tests\StringGenerator.Tests.csproj", "{1F54EEA4-1E23-49D6-8AF6-2A1F139C6BB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringGenerator.Tests", "StringGenerator.Tests\StringGenerator.Tests.csproj", "{1F54EEA4-1E23-49D6-8AF6-2A1F139C6BB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

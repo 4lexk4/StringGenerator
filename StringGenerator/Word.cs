@@ -2,10 +2,6 @@
 
 namespace StringGenerator
 {
-    /// <summary>
-    /// Represents the word that can be incremented. Contains parts (chunks) that can be changed.
-    /// First chunk is in the beginning of the word.
-    /// </summary>
     public sealed class Word
     {
         private readonly IReadOnlyList<IChunk> _chunks;
@@ -22,9 +18,6 @@ namespace StringGenerator
         {
         }
 
-        /// <summary>
-        /// Gets the string value of the word by getting string value for each word.
-        /// </summary>
         public string Value
         {
             get
@@ -40,9 +33,6 @@ namespace StringGenerator
             }
         }
 
-        /// <summary>
-        /// Sets the word value to default.
-        /// </summary>
         public void Reset()
         {
             foreach (var chunkSet in _chunks)
@@ -51,10 +41,6 @@ namespace StringGenerator
             }
         }
 
-        /// <summary>
-        /// Increments the word by incrementing it's last chunk value by 1.
-        /// </summary>
-        /// <returns>true, if the new value is out of range. In this case all chunks are set to first value</returns>
         public bool Increment()
         {
             bool Increment(int index)
