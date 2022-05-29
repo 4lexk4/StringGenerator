@@ -35,6 +35,18 @@ namespace StringGenerator.Tests.Chunks
         }
 
         [Test]
+        public void Reset_SetsValueToDefault()
+        {
+            var intervalChunk = Chunk.FromTo(0, 9);
+
+            intervalChunk.Value = 5;
+            Assert.AreEqual(5, intervalChunk.Value);
+
+            intervalChunk.Reset();
+            Assert.AreEqual(0, intervalChunk.Value);
+        }
+
+        [Test]
         [TestCase(0)]
         [TestCase(3)]
         [TestCase(4)]

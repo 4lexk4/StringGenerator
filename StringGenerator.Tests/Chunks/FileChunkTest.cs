@@ -36,6 +36,23 @@ namespace StringGenerator.Tests.Chunks
         }
 
         [Test]
+        public void Reset_SetsValueToDefault()
+        {
+            using (var tempFile = new TempFile())
+            {
+                tempFile.WriteAllLines(0, 1, 2, 3, 4);
+
+                var fileChunk = Chunk.FromFile<int>(tempFile.FileName);
+
+                fileChunk.Value = 3;
+                Assert.AreEqual(3, fileChunk.Value);
+
+                fileChunk.Reset();
+                Assert.AreEqual(0, fileChunk.Value);
+            }
+        }
+
+        [Test]
         public void Value_CanBeSet_IfPresentInCollection()
         {
             using (var tempFile = new TempFile())

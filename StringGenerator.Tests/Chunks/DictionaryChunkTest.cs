@@ -31,6 +31,18 @@ namespace StringGenerator.Tests.Chunks
         }
 
         [Test]
+        public void Reset_SetsValueToDefault()
+        {
+            var dictionaryChunk = Chunk.Collection(0, 1, 2, 3, 4);
+
+            dictionaryChunk.Value = 3;
+            Assert.AreEqual(3, dictionaryChunk.Value);
+
+            dictionaryChunk.Reset();
+            Assert.AreEqual(0, dictionaryChunk.Value);
+        }
+
+        [Test]
         public void Value_CanBeSet_IfPresentInCollection()
         {
             var dictionaryChunk = Chunk.Collection(0, 1, 2);
