@@ -8,7 +8,10 @@ namespace StringGenerator.Tests
         [Test]
         public void Increment_GoesThrowAllDictionaryValues_WhenCalls()
         {
-            var word = new Word(Chunk.Collection('a', 'b'), Chunk.Collection(1, 2, 3 ));
+            var word = new Word()
+                .AddChunk(Chunk.Collection('a', 'b'))
+                .AddChunk(Chunk.Collection(1, 2, 3));
+
             var expectedValues = new string[] { "a1", "a2", "a3", "b1", "b2", "b3" };
 
             for(var i = 0; i < expectedValues.Length; i++)
@@ -21,7 +24,10 @@ namespace StringGenerator.Tests
         [Test]
         public void Increment_GoesThrowAllIntervalValues_WhenCalls()
         {
-            var word = new Word(Chunk.FromTo(1, 2), Chunk.FromTo(3, 4));
+            var word = new Word()
+                .AddChunk(Chunk.FromTo(1, 2))
+                .AddChunk(Chunk.FromTo(3, 4));
+
             var expectedValues = new string[] { "13", "14", "23", "24" };
 
             for (var i = 0; i < expectedValues.Length; i++)
@@ -41,7 +47,10 @@ namespace StringGenerator.Tests
                     tempFile1.WriteAllLines("row00", "row01", "row02");
                     tempFile2.WriteAllLines("row10", "row11");
 
-                    var word = new Word(Chunk.File(tempFile1.FileName), Chunk.File(tempFile2.FileName));
+                    var word = new Word()
+                        .AddChunk(Chunk.FromFile<string>(tempFile1.FileName))
+                        .AddChunk(Chunk.FromFile<string>(tempFile2.FileName));
+
                     var expectedValues = new string[] { "row00row10", "row00row11", "row01row10", "row01row11", "row02row10", "row02row11" };
 
                     for (var i = 0; i < expectedValues.Length; i++)

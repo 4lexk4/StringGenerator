@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using StringGenerator.Chunks;
 using System;
 
 namespace StringGenerator.Tests.Chunks
@@ -10,27 +9,27 @@ namespace StringGenerator.Tests.Chunks
         [Test]
         public void Constructor_ThrowsException_IfParameterIsNull()
         {
-            Assert.Throws<ArgumentException>(() => Chunk.File(null));
+            Assert.Throws<ArgumentException>(() => Chunk.FromFile<string>(null));
         }
 
         [Test]
         public void Constructor_ThrowsException_IfFileDoesNotExist()
         {
-            Assert.Throws<ArgumentException>(() => Chunk.File("test_filename.txt"));
+            Assert.Throws<ArgumentException>(() => Chunk.FromFile<string>("test_filename.txt"));
         }
 
         [Test]
-        public void Increment_GoesThrowAllValues_AfterCalls()
+        public void Increment_GoesThroughAllValues_AfterCalls()
         {
             using(var tempFile = new TempFile())
             {
-                tempFile.WriteAllLines("row0", "row1", "row2");
+                tempFile.WriteAllLines(0, 1, 2);
 
-                var fileChunk = Chunk.File(tempFile.FileName);
+                var fileChunk = Chunk.FromFile<int>(tempFile.FileName);
 
                 for (var i = 0; i < 3; i++)
                 {
-                    Assert.AreEqual($"row{i}", fileChunk.Value);
+                    Assert.AreEqual(i, fileChunk.Value);
                     Assert.AreEqual(i == 2, fileChunk.Increment());
                 }
             }
@@ -43,7 +42,7 @@ namespace StringGenerator.Tests.Chunks
             {
                 tempFile.WriteAllLines("row0", "row1", "row2");
 
-                var fileChunk = Chunk.File(tempFile.FileName);
+                var fileChunk = Chunk.FromFile<string>(tempFile.FileName);
 
                 Assert.AreEqual($"row0", fileChunk.Value);
                 fileChunk.Value = "row2";
@@ -57,15 +56,15 @@ namespace StringGenerator.Tests.Chunks
         {
             using (var tempFile = new TempFile())
             {
-                tempFile.WriteAllLines("row0", "row1", "row2");
+                tempFile.WriteAllLines(0, 1, 2);
 
-                var fileChunk = Chunk.File(tempFile.FileName);
+                var fileChunk = Chunk.FromFile<int>(tempFile.FileName);
 
-                Assert.AreEqual($"row0", fileChunk.Value);
+                Assert.AreEqual(0, fileChunk.Value);
 
                 Assert.Throws<ArgumentException>(() => 
                 { 
-                    fileChunk.Value = "111"; 
+                    fileChunk.Value = 4;
                 });
             }
         }

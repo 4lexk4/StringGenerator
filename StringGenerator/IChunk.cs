@@ -2,10 +2,10 @@
 {
     public interface IChunk
     {
-        string Value { get; set; }
-
         void Reset();
 
         bool Increment();
+
+        string Value { get; }
     }
 }

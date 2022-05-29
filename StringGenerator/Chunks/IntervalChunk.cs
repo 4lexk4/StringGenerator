@@ -1,6 +1,6 @@
 ﻿namespace StringGenerator.Chunks
 {
-    internal sealed class IntervalChunk : IChunk
+    internal sealed class IntervalChunk : GenericChunk<int>
     {
         private readonly int _from;
         private readonly int _to;
@@ -16,22 +16,21 @@
             Reset();
         }
 
-        public string Value 
+        public override int Value 
         { 
             get
             {
-                return _currentValue.ToString();
+                return _currentValue;
             }
             set
             {
-                if (!int.TryParse(value, out int intValue)) throw new ArgumentException("Value must be int", nameof(value));
-                if (intValue > _to || intValue < _from) throw new ArgumentOutOfRangeException($"Value ({intValue}) must be between From ({_from}) and To ({_to})", nameof(value));
+                if (value > _to || value < _from) throw new ArgumentOutOfRangeException(nameof(value), $"Value ({value}) must be between From ({_from}) and To ({_to})");
 
-                _currentValue = intValue;
+                _currentValue = value;
             }
         }
 
-        public bool Increment()
+        public override bool Increment()
         {
             if (_currentValue == int.MaxValue)
             {
@@ -50,7 +49,7 @@
             return false;
         }
 
-        public void Reset()
+        public override void Reset()
         {
             _currentValue = _from;
         }

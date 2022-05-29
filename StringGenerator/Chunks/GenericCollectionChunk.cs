@@ -1,6 +1,6 @@
 ﻿namespace StringGenerator.Chunks
 {
-    public abstract class GenericCollectionChunk<T> : IChunk
+    public abstract class GenericCollectionChunk<T> : GenericChunk<T> where T : IEquatable<T>
     {
         private readonly T[] _rows;
         private int _rowIndex;
@@ -13,26 +13,27 @@
             _rows = rows;
         }
 
-        public string Value
+        public override T Value
         {
             get
             {
-                return _rows[_rowIndex]?.ToString() ?? string.Empty;
+                return _rows[_rowIndex];
             }
+
             set
             {
+                if (value == null) throw new ArgumentNullException(nameof(value));
+
                 for(_rowIndex = 0; _rowIndex < _rows.Length; _rowIndex++)
                 {
-                    if (string.Equals(_rows[_rowIndex]?.ToString(), value, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        return;
-                    }
+                    if (value.Equals(_rows[_rowIndex])) return;
                 }
+
                 throw new ArgumentException($"{value} doesn't belong to collection");
             }
         }
 
-        public bool Increment()
+        public override bool Increment()
         {
             _rowIndex++;
             if (_rowIndex >= _rows.Length)
@@ -44,7 +45,7 @@
             return false;
         }
 
-        public void Reset()
+        public override void Reset()
         {
             _rowIndex = 0;
         }

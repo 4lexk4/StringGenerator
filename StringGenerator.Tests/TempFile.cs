@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace StringGenerator.Tests
 {
@@ -7,9 +8,11 @@ namespace StringGenerator.Tests
     {
         public string FileName { get; } = Path.GetTempFileName();
 
-        public void WriteAllLines(params string[] lines)
+        public void WriteAllLines<T>(params T[] lines)
         {
-            File.WriteAllLines(FileName, lines);
+            if (lines == null) return;
+
+            File.WriteAllLines(FileName, lines.Select(x => x?.ToString() ?? string.Empty));
         }
 
         public string[] ReadAllLines()

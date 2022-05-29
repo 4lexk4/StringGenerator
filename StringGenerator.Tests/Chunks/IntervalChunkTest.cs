@@ -19,7 +19,7 @@ namespace StringGenerator.Tests.Chunks
 
             for (var i = 0; i < 3; i++)
             {
-                Assert.AreEqual(i.ToString(), intervalChunk.Value);
+                Assert.AreEqual(i, intervalChunk.Value);
                 Assert.AreEqual(i == 2, intervalChunk.Increment());
             }
         }
@@ -29,9 +29,9 @@ namespace StringGenerator.Tests.Chunks
         {
             var intervalChunk = Chunk.FromTo(int.MaxValue, int.MaxValue);
 
-            Assert.AreEqual(int.MaxValue.ToString(), intervalChunk.Value);
+            Assert.AreEqual(int.MaxValue, intervalChunk.Value);
             Assert.IsTrue(intervalChunk.Increment());
-            Assert.AreEqual(int.MaxValue.ToString(), intervalChunk.Value);
+            Assert.AreEqual(int.MaxValue, intervalChunk.Value);
         }
 
         [Test]
@@ -42,11 +42,11 @@ namespace StringGenerator.Tests.Chunks
         {
             var intervalChunk = Chunk.FromTo(0, 4);
 
-            Assert.AreEqual("0", intervalChunk.Value);
+            Assert.AreEqual(0, intervalChunk.Value);
 
-            intervalChunk.Value = value.ToString();
+            intervalChunk.Value = value;
 
-            Assert.AreEqual(value.ToString(), intervalChunk.Value);
+            Assert.AreEqual(value, intervalChunk.Value);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace StringGenerator.Tests.Chunks
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                intervalChunk.Value = value.ToString();
+                intervalChunk.Value = value;
             });
         }
     }

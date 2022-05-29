@@ -25,7 +25,7 @@ namespace StringGenerator.Tests.Chunks
 
             for (var i = 0; i < 3; i++)
             {
-                Assert.AreEqual(i.ToString(), dictionaryChunk.Value);
+                Assert.AreEqual(i, dictionaryChunk.Value);
                 Assert.AreEqual(i == 2, dictionaryChunk.Increment());
             }
         }
@@ -35,9 +35,9 @@ namespace StringGenerator.Tests.Chunks
         {
             var dictionaryChunk = Chunk.Collection(0, 1, 2);
 
-            Assert.AreEqual("0", dictionaryChunk.Value);
-            dictionaryChunk.Value = "2";
-            Assert.AreEqual("2", dictionaryChunk.Value);
+            Assert.AreEqual(0, dictionaryChunk.Value);
+            dictionaryChunk.Value = 2;
+            Assert.AreEqual(2, dictionaryChunk.Value);
         }
 
         [Test]
@@ -45,14 +45,10 @@ namespace StringGenerator.Tests.Chunks
         {
             var dictionaryChunk = Chunk.Collection(0, 1, 2);
 
-            Assert.AreEqual("0", dictionaryChunk.Value);
+            Assert.AreEqual(0, dictionaryChunk.Value);
             Assert.Throws<ArgumentException>(() =>
             {
-                dictionaryChunk.Value = "3";
-            });
-            Assert.Throws<ArgumentException>(() =>
-            {
-                dictionaryChunk.Value = "a";
+                dictionaryChunk.Value = 3;
             });
         }
     }

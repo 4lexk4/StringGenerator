@@ -4,18 +4,15 @@ namespace StringGenerator
 {
     public sealed class Word
     {
-        private readonly IReadOnlyList<IChunk> _chunks;
+        private readonly IList<IChunk> _chunks = new List<IChunk>();
 
-        public Word(IReadOnlyList<IChunk> chunks)
+        public Word AddChunk(IChunk chunk)
         {
-            if (chunks == null) throw new ArgumentNullException(nameof(chunks));
-            if (chunks.Count == 0) throw new ArgumentException("Collection of chunks cannot be empty", nameof(chunks));
+            if (chunk is null) throw new ArgumentNullException(nameof(chunk));
 
-            _chunks = chunks;
-        }
+            _chunks.Add(chunk);
 
-        public Word(params IChunk[] chunks) : this(chunks?.ToList() ?? new List<IChunk>())
-        {
+            return this;
         }
 
         public string Value
